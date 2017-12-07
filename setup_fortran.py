@@ -1,7 +1,13 @@
 import os
 import subprocess
+import sys
 
+# Default fortran flags
 compiler_flags = '-Wall -Wconversion -Wextra -Waliasing -ffree-form -ffree-line-length-none -ffast-math -march=native -funroll-loops -fno-protect-parens'
+
+# System depedent flags
+if sys.platform == 'darwin':
+    compiler_flags = '-Wa,-q -Wall -Wconversion -Wextra -Waliasing -ffree-form -ffree-line-length-none -ffast-math -march=native -funroll-loops -fno-protect-parens'
 
 def BuildFortranObjects(sources, compiler='gfortran'):
     objects = []
