@@ -8,15 +8,20 @@ import sys
 import os
 import subprocess
 
+# Get the parallel Fortran compiler
 try:
     MPIFC = os.environ['MPIFC']
 except:
     MPIFC = subprocess.check_output(['which','mpif90']).split()[0]
+
 print "Using MPI Fortran compiler ", MPIFC
 
-#MPI_INCLUDE_DIRS = subprocess.check_output([MPIFC,'--showme:incdirs']).split()
-#MPI_LINK_DIRS = subprocess.check_output([MPIFC,'--showme:libdirs']).split()
-#MPI_LIBS = subprocess.check_output([MPIFC,'--showme:libs']).split()
+FC = MPIFC
+
+
+MPI_INCLUDE_DIRS = subprocess.check_output([MPIFC,'--showme:incdirs']).split()
+MPI_LINK_DIRS = subprocess.check_output([MPIFC,'--showme:libdirs']).split()
+MPI_LIBS = subprocess.check_output([MPIFC,'--showme:libs']).split()
 
 # Python version
 if sys.version_info[:2] < (2, 7):
@@ -28,7 +33,7 @@ version = '1.0'
 # Build the fortran extension modules.
 obj_compact_6th_order = BuildFortranObjects(['floatpy/derivatives/compact/kind_parameters.F90',
                                              'floatpy/derivatives/compact/constants.F90',
-                                             'floatpy/derivatives/compact/cd06.F90'])
+                                             'floatpy/derivatives/compact/cd06.F90'],compiler=FC)
 
 ext_compact_6th_order = Extension('_pycd06',
                                     sources = ['floatpy/derivatives/compact/f90wrap_cd06.f90'],
@@ -37,7 +42,7 @@ ext_compact_6th_order = Extension('_pycd06',
 
 obj_compact_10th_order = BuildFortranObjects(['floatpy/derivatives/compact/kind_parameters.F90',
                                               'floatpy/derivatives/compact/constants.F90',
-                                              'floatpy/derivatives/compact/cd10.F90'])
+                                              'floatpy/derivatives/compact/cd10.F90'],compiler=FC)
 
 ext_compact_10th_order = Extension('_pycd10',
                                      sources = ['floatpy/derivatives/compact/f90wrap_cd10.f90'],
@@ -46,7 +51,7 @@ ext_compact_10th_order = Extension('_pycd10',
 
 obj_filter_cf90 = BuildFortranObjects(['floatpy/filters/kind_parameters.F90',
                                        'floatpy/filters/constants.F90',
-                                       'floatpy/filters/cf90.F90'])
+                                       'floatpy/filters/cf90.F90'],compiler=FC)
 
 ext_filter_cf90 = Extension('_pycf90',
                               sources = ['floatpy/filters/f90wrap_cf90.f90'],
@@ -55,7 +60,7 @@ ext_filter_cf90 = Extension('_pycf90',
 
 obj_filter_gaussian = BuildFortranObjects(['floatpy/filters/kind_parameters.F90',
                                            'floatpy/filters/constants.F90',
-                                           'floatpy/filters/gaussian.F90'])
+                                           'floatpy/filters/gaussian.F90'],compiler=FC)
 
 ext_filter_gaussian = Extension('_pygaussian',
                                   sources = ['floatpy/filters/f90wrap_gaussian.f90'],
