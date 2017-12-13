@@ -16,7 +16,10 @@ except:
 
 print "Using MPI Fortran compiler ", MPIFC
 
-FC = MPIFC
+try:
+    FC = os.environ['FC']
+except:
+    FC = 'gfortran'
 
 
 MPI_INCLUDE_DIRS = subprocess.check_output([MPIFC,'--showme:incdirs']).split()
