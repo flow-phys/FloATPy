@@ -17,7 +17,7 @@ except:
 print "Using MPI Fortran compiler ", MPIFC
 
 try:
-    FC = os.environ['FC']
+    FC = os.environ['MPIFC']
 except:
     FC = 'gfortran'
 
