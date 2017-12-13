@@ -7,7 +7,7 @@ compiler_flags = '-Wall -Wconversion -Wextra -Waliasing -ffree-form -ffree-line-
 
 # System depedent flags
 if sys.platform == 'darwin':
-    compiler_flags = '-Wall -Wconversion -Wextra -Waliasing -ffree-form -ffree-line-length-none -ffast-math -march=native -funroll-loops'# -fno-protect-parens'
+    compiler_flags = '-Wall -Wconversion -Wextra -Waliasing -ffree-form -ffree-line-length-none -ffast-math -march=native -funroll-loops -fno-protect-parens'
 
 def BuildFortranObjects(sources, compiler='gfortran'):
     objects = []
