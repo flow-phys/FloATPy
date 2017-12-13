@@ -14,9 +14,9 @@ except:
     MPIFC = subprocess.check_output(['which','mpif90']).split()[0]
 print "Using MPI Fortran compiler ", MPIFC
 
-MPI_INCLUDE_DIRS = subprocess.check_output([MPIFC,'--showme:incdirs']).split()
-MPI_LINK_DIRS = subprocess.check_output([MPIFC,'--showme:libdirs']).split()
-MPI_LIBS = subprocess.check_output([MPIFC,'--showme:libs']).split()
+#MPI_INCLUDE_DIRS = subprocess.check_output([MPIFC,'--showme:incdirs']).split()
+#MPI_LINK_DIRS = subprocess.check_output([MPIFC,'--showme:libdirs']).split()
+#MPI_LIBS = subprocess.check_output([MPIFC,'--showme:libs']).split()
 
 # Python version
 if sys.version_info[:2] < (2, 7):
